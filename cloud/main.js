@@ -40,5 +40,5 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
      console.log("#### PUSH ERROR" + error.message);
   }, useMasterKey: true});
 
-  response.success('boobs');
+  response.success('success');
 });
