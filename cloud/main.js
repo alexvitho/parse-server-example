@@ -23,13 +23,15 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
 
-  Parse.Push.send({
-  where: pushQuery,      // for sending to a specific channel                                                                                                                                 data: payload,
-  }, { success: function() {
-     console.log("#### PUSH OK");
-  }, error: function(error) {
-     console.log("#### PUSH ERROR" + error.message);
-  }, useMasterKey: true});
-
-  response.success('testSuccess');
+Parse.Push.send({
+  channels: ['test-channel'],
+  data: {
+    alert: 'Test',
+    badge: 1,
+    sound: 'default'
+  }
+}, { useMasterKey: true }).then(() => {
+  console.log('Push ok');
+}, (e) => {
+  console.log('Push error', e);
 });
