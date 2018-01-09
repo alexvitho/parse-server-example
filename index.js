@@ -17,24 +17,12 @@ if (process.env.GCM_SENDER_ID && process.env.GCM_API_KEY) {
                               apiKey: process.env.GCM_API_KEY || ''};
 }
 
-var filesAdapter = null;  // enable Gridstore to be the default
-if (process.env.S3_ENABLE) {
-    var S3Adapter = require('parse-server').S3Adapter;
-
-    filesAdapter = new S3Adapter(
-        process.env.AWS_ACCESS_KEY,
-        process.env.AWS_SECRET_ACCESS_KEY,
-        {bucket: process.env.AWS_BUCKET_NAME, bucketPrefix: "", directAccess: true}
-    );
-}
-
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   push: pushConfig,
-  filesAdapter: filesAdapter,
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
