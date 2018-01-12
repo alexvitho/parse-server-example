@@ -1,35 +1,30 @@
 
-// Depends on this function: https://github.com/codepath/parse-server-example/blob/master/cloud/main.js
-Parse.Cloud.define('pushNotification', function(request, response) {
+Parse.Cloud.define("pushNotification", function(request, response) {
 
-  // request has 2 parameters: params passed by the client and the authorized user
-  var params = request.params;
-  var user = request.user;
+  // You can get parameters in here... You can access to specific parameter like this: 
+  // request.params.{PARAM_NAME}
 
-  // extract out the channel to send
-  var attribute1FromUser = params.attribute1;
-  var attribute2FromUser = params.attribute2;
-  var attribute3FromUser = params.attribute3;
-  
-  // use to custom tweak whatever payload you wish to send
-  var pushQuery = new Parse.Query(Parse.Installation);
-  pushQuery.equalTo("deviceType", "android");
+  // build the query for the push notification 
+  // the query can be built by your parameters (e.g. to which userId or channel id etc.)
+  var query = new Parse.Query(Parse.Installation);
+  query.exists("deviceToken");
 
-  
+  // this is the push payload 
   var payload = {
-    attribute1: attribute1FromUser,
-    attribute2: attribute2FromUser,
-    attribute3: attribute3FromUser
-  }
+    alert: "after save push",
+    sound: "default"
+      // ... add more here if required 
+  };
 
   Parse.Push.send({
-  where: pushQuery,      // for sending to a specific channel                                                                                                                                 
-    data: payload,
-  }, { success: function() {
-     console.log("#### PUSH OK");
-  }, error: function(error) {
-     console.log("#### PUSH ERROR" + error.message);
-  }, useMasterKey: true});
-
-  response.success('techAlertSuccessConnecting');
+      data: payload,
+      where: query
+    }, {
+      useMasterKey: true
+    }) // useMasterKey is required currently 
+    .then(function() {
+      response.success("Push Sent!");
+    }, function(error) {
+      response.error("Error while trying to send push " + error.message);
+    });
 });
