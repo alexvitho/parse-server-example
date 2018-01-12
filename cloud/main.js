@@ -11,9 +11,9 @@ Parse.Cloud.define("pushNotification", function(request, response) {
   query.exists("deviceToken");
 
   var payload = {
-    attibute1: att1,
-    attibute2: att2,
-    attibute3: att3
+    attibute1: "yoni",
+    attibute2: "alex",
+    attibute3: "leon"
   };
 
   Parse.Push.send({
