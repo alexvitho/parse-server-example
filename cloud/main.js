@@ -1,5 +1,5 @@
 
-Parse.Cloud.define("notifyUsers", function(request, response) {
+Parse.Cloud.define('notifyUsers', function(request, response) {
   var query = new Parse.Query(Parse.Installation);
   query.exists("deviceToken");
 
