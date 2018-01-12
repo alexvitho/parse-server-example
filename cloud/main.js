@@ -3,10 +3,6 @@
 Parse.Cloud.define("pushNotification", function(request, response) {
   var params = request.params;
   var user = request.user;
-  var att1 = params.attibute1;
-  var att2 = params.attibute2;
-  var att3 = params.attibute3;
-
   var query = new Parse.Query(Parse.Installation);
   query.exists("deviceToken");
 
@@ -15,7 +11,11 @@ Parse.Cloud.define("pushNotification", function(request, response) {
     attibute2: "alex",
     attibute3: "leon"
   };
-
+  
+  payload.attibute1 = params.attibute1;
+  payload.attibute2 = params.attibute2;
+  payload.attibute3 = params.attibute3;
+  
   Parse.Push.send({
       data: payload,
       where: query
