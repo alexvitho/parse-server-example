@@ -1,6 +1,6 @@
 
 // Depends on this function: https://github.com/codepath/parse-server-example/blob/master/cloud/main.js
-Parse.Cloud.define('pushNotification', function(request, response) {
+Parse.Cloud.define('notifyUsers', function(request, response) {
 
   // request has 2 parameters: params passed by the client and the authorized user
   var params = request.params;
