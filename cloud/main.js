@@ -1,8 +1,6 @@
 
 
 Parse.Cloud.define("pushNotification", function(request, response) {
-  var params = request.params;
-  var user = request.user;
   var query = new Parse.Query(Parse.Installation);
   query.exists("deviceToken");
 
