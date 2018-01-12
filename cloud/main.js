@@ -1,6 +1,6 @@
 
 // Depends on this function: https://github.com/codepath/parse-server-example/blob/master/cloud/main.js
-Parse.Cloud.define('pushChannelTest', function(request, response) {
+Parse.Cloud.define('pushNotification', function(request, response) {
 
   // request has 2 parameters: params passed by the client and the authorized user
   var params = request.params;
@@ -15,11 +15,11 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
   var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo("deviceType", "android");
 
-  var payload = {"data": {
-      "alert": message,
-      "action": action,
-      "customdata": customData}
-                };
+  var payload =  {
+        "action": "theAction",
+        "arg1": "arg1",
+        "arg2": "arg2"
+  };
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
 
