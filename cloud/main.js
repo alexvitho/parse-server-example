@@ -7,17 +7,17 @@ Parse.Cloud.define('pushNotification', function(request, response) {
 
   // extract out the channel to send
   var action = params.action;
-  var message = params.message;
-  var customData = params.customData;
+  var arg1 = params.arg1;
+  var arg2 = params.arg2;
 
   // use to custom tweak whatever payload you wish to send
   var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo("deviceType", "android");
 
   var payload = {"data": {
-      "alert": message,
       "action": action,
-      "customdata": customData}
+      "arg1": arg1,
+      "arg2": arg2}
                 };
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
