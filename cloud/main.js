@@ -16,7 +16,7 @@ Parse.Cloud.define('pushNotification', function(request, response) {
   pushQuery.equalTo("deviceType", "android");
 
   var payload =  {
-        "action": "theAction",
+        "action": action,
         "arg1": "arg1",
         "arg2": "arg2"
   };
