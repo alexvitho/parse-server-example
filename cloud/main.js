@@ -1,6 +1,7 @@
 
 
 Parse.Cloud.define("pushNotification", function(request, response) {
+  console.log("yoni!!!!!!!!!!"+request.Attibute1);
   var params = request.params;
   var user = request.user;
   var query = new Parse.Query(Parse.Installation);
@@ -12,9 +13,7 @@ Parse.Cloud.define("pushNotification", function(request, response) {
     attibute3: "leon"
   };
   
-  payload.attibute1 = request.Attibute1;
-  payload.attibute2 = request.Attibute2;
-  payload.attibute3 = request.Attibute3;
+
   
   Parse.Push.send({
       data: payload,
