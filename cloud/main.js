@@ -1,14 +1,22 @@
 
 
 
+
 Parse.Cloud.define("pushNotification", function(request, response) {
+
+  // You can get parameters in here... You can access to specific parameter like this: 
+  // request.params.{PARAM_NAME}
+
+  // build the query for the push notification 
+  // the query can be built by your parameters (e.g. to which userId or channel id etc.)
   var query = new Parse.Query(Parse.Installation);
   query.exists("deviceToken");
 
+  // this is the push payload 
   var payload = {
-    action: "yoni",
-    arg1: "alex",
-    arg2: "leon"
+    alert: "after save push",
+    sound: "default"
+      // ... add more here if required 
   };
 
   Parse.Push.send({
