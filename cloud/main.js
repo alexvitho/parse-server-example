@@ -10,7 +10,6 @@ Parse.Cloud.define('pushNotification', function(request, response) {
   var action = params.action;
   var first = params.first;
   var second = params.second;
-  var notify = params.notify;
 
   // use to custom tweak whatever payload you wish to send
   var pushQuery = new Parse.Query(Parse.Installation);
@@ -19,8 +18,7 @@ Parse.Cloud.define('pushNotification', function(request, response) {
   var payload =  {
         "action": action,
         "first": first,
-        "second": second,
-        "notify": notify
+        "second": second
   };
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
