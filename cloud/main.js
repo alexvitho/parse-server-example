@@ -12,9 +12,11 @@ Parse.Cloud.define('pushNotification', function(request, response) {
   var second = params.second;
   var arrivedFrom = params.arrivedFrom;
 
+  var ids = request.object.get("SFRs");
   // use to custom tweak whatever payload you wish to send
   var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo("deviceType", "android");
+  pushQuery.containedIn("objectId",ids);
 
   var payload =  {
         "action": action,
